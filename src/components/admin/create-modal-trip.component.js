@@ -1,8 +1,9 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { CheckIcon, TruckIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, MapIcon, TruckIcon } from "@heroicons/react/24/outline";
 import Select1Component from "../../shared/components/selects/select-1.component";
 import tripService from "../../services/trip.service";
+import appService from "../../services/app.service";
 export default function CreteModalTripComponent({
   departments,
   selectedOut,
@@ -11,6 +12,7 @@ export default function CreteModalTripComponent({
   setSelectedIn,
   open,
   setOpen,
+  updateTable,
 }) {
   const cancelButtonRef = useRef(null);
   const selectDate = useRef(null);
@@ -48,9 +50,9 @@ export default function CreteModalTripComponent({
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div>
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                    <TruckIcon
-                      className="h-6 w-6 text-green-600"
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-admin2">
+                    <MapIcon
+                      className="h-6 w-6 text-white"
                       aria-hidden="true"
                     />
                   </div>
@@ -96,16 +98,18 @@ export default function CreteModalTripComponent({
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                   <button
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
+                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-admin2 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-admin2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
                     onClick={() =>
-                      tripService
-                        .createTrip({
+                      appService
+                        .createTripAndCreateSeats({
                           originPoint: selectedOut.id,
                           destinationPoint: selectedIn.id,
                           departureTime: selectDate.current,
                         })
                         .then((res) => {
                           console.log(res);
+                          updateTable();
+                          setOpen(false);
                         })
                     }
                   >
@@ -114,7 +118,9 @@ export default function CreteModalTripComponent({
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                    }}
                     ref={cancelButtonRef}
                   >
                     Cancelar

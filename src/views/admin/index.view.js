@@ -3,10 +3,7 @@ import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import AdminTableComponent from "../../components/admin/table.component";
 
-const navigation = [
-  { name: "Viajes", href: "/platform", current: true },
-  { name: "Mis tickets", href: "#", current: false },
-];
+const navigation = [{ name: "Viajes", href: "/admin", current: true }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -23,21 +20,14 @@ function AdminIndex() {
         ```
       */}
       <div className="min-h-full">
-        <div className="bg-red-800 pb-32">
-          <Disclosure as="nav" className="bg-red-800">
+        <div className="bg-admin2 pb-32">
+          <Disclosure as="nav" className="bg-admin2">
             {({ open }) => (
               <>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                  <div className="border-b border-red-700">
+                  <div className="border-b border-admin3">
                     <div className="flex h-16 items-center justify-between px-4 sm:px-0">
                       <div className="flex items-center">
-                        <div className="flex-shrink-0">
-                          <img
-                            className="h-8 w-8"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                            alt="Your Company"
-                          />
-                        </div>
                         <div className="hidden md:block">
                           <div className="ml-10 flex items-baseline space-x-4">
                             {navigation.map((item) => (
@@ -55,13 +45,6 @@ function AdminIndex() {
                                 {item.name}
                               </a>
                             ))}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="hidden md:block">
-                        <div className="ml-4 flex items-center md:ml-6">
-                          <div className="text-white mr-3">
-                            <label>SOY SUPER USUARIO</label>
                           </div>
                         </div>
                       </div>

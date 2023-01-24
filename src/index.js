@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import IndexView from "./views/index.view";
 import IndexPlatformView from "./views/platform/index.view";
+import TicketPlatforView from "./views/platform/tickets.view";
 import IndexAdminView from "./views/admin/index.view";
 // CSS Framework
 import "./assets/styles/index.css";
@@ -16,6 +17,7 @@ root.render(
     <Routes>
       <Route path="/" element={<IndexView />} />
       <Route path="/platform" element={<IndexPlatformView />} />
+      <Route path="/platform/tickets" element={<TicketPlatforView />} />
       <Route path="/admin" element={<IndexAdminView />} />
     </Routes>
   </BrowserRouter>

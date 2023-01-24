@@ -6,10 +6,11 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import TablePlatformComponent from "../../components/platform/table.component";
+import TicketsTableComponents from "../../components/platform/tickets-table.component";
 
 const navigation = [
-  { name: "Viajes", href: "/platform", current: true },
-  { name: "Mis tickets", href: "/platform/tickets", current: false },
+  { name: "Viajes", href: "/platform", current: false },
+  { name: "Mis tickets", href: "#", current: true },
 ];
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -17,6 +18,14 @@ function classNames(...classes) {
 function PlatformIndex() {
   return (
     <>
+      {/*
+        This example requires updating your template:
+
+        ```
+        <html class="h-full bg-gray-100">
+        <body class="h-full">
+        ```
+      */}
       <div className="min-h-full">
         <div className="bg-gray-800 pb-32">
           <Disclosure as="nav" className="bg-gray-800">
@@ -26,13 +35,6 @@ function PlatformIndex() {
                   <div className="border-b border-gray-700">
                     <div className="flex h-16 items-center justify-between px-4 sm:px-0">
                       <div className="flex items-center">
-                        <div className="flex-shrink-0">
-                          <img
-                            className="h-8 w-8"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                            alt="Your Company"
-                          />
-                        </div>
                         <div className="hidden md:block">
                           <div className="ml-10 flex items-baseline space-x-4">
                             {navigation.map((item) => (
@@ -151,7 +153,7 @@ function PlatformIndex() {
           <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
             {/* Replace with your content */}
             <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
-              <TablePlatformComponent />
+              <TicketsTableComponents />
             </div>
             {/* /End replace */}
           </div>

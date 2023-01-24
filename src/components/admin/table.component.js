@@ -1,10 +1,14 @@
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowPathIcon,
+  PencilIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import departmentsService from "../../services/departments.service";
 import tripService from "../../services/trip.service";
-import Input1Component from "../../shared/components/inputs/input-1.component";
 import Select1Component from "../../shared/components/selects/select-1.component";
 import CreateModalTripComponent from "./create-modal-trip.component";
+import ViewPassengersComponent from "./view-passenger.component";
 
 export default function AdminTableComponent() {
   // States
@@ -24,8 +28,20 @@ export default function AdminTableComponent() {
   });
   // Create Trip Modal States
   const [openCreateModal, setOpenCreateModal] = useState(false);
-
-  function init() {
+  const [openViewPassengersModal, setOpenViewPassengersModal] = useState(false);
+  const [selectPassengers, setSelectPassengers] = useState([
+    {
+      id: 154,
+      seatNumber: 10,
+      isBooked: true,
+      passenger: {
+        id: 5,
+        name: "asd",
+        lastName: "cxz",
+      },
+    },
+  ]);
+  function initView() {
     tripService.getAllTrips().then((response) => {
       console.log(response.data);
       setTrips(response.data);
@@ -36,7 +52,7 @@ export default function AdminTableComponent() {
       console.log(response.data);
       setDepartments(response.data);
     });
-    init();
+    initView();
   }, []);
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -53,15 +69,15 @@ export default function AdminTableComponent() {
               setOpenCreateModal(true);
             }}
             type="button"
-            className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+            className="inline-flex items-center justify-center rounded-md border border-transparent bg-admin4 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-admin4 focus:ring-offset-2 sm:w-auto"
           >
             Crear viaje
           </button>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
-        <div className="  grid grid-cols-1 mb-10  bg-red-600 p-4 rounded-md">
-          <div className="grid md:grid-cols-4 grid-cols-1 md:space-x-3">
+        <div className="  grid grid-cols-1 mb-10  bg-admin3 p-4 rounded-md">
+          <div className="grid md:grid-cols-2 grid-cols-1 md:space-x-3">
             <Select1Component
               title={"Punto de partida"}
               items={departments}
@@ -76,22 +92,28 @@ export default function AdminTableComponent() {
               setSelected={setSelectedFilterIn}
               className={"block text-sm font-medium text-white"}
             />
-            <Input1Component
-              title={"Asiento"}
-              example={"15"}
-              type={"number"}
-              name={"SeatsNumber"}
-            />
-            <Input1Component
-              title={"Pasajero"}
-              example={"75181614"}
-              type={"number"}
-              name={"PassengerDni"}
-            />
           </div>
-          <div className="justify-end flex mt-3">
-            <button className="text-black px-2 border border-gray-300 bg-white rounded-md">
+          <div className="justify-end flex mt-3 space-x-2">
+            <button
+              onClick={() => {
+                tripService
+                  .findByPoints(selectedFilterOut.name, selectedFilterIn.name)
+                  .then((response) => {
+                    console.log(response.data);
+                    setTrips(response.data);
+                  });
+              }}
+              className="text-black px-2 py-1.5 border border-gray-300 bg-white rounded-md"
+            >
               Buscar
+            </button>
+            <button
+              onClick={() => {
+                initView();
+              }}
+              className="text-black px-2 py-1.5 border border-gray-300 bg-white rounded-md"
+            >
+              <ArrowPathIcon className="h-5 w-5 text-red-700" />
             </button>
           </div>
         </div>
@@ -163,7 +185,7 @@ export default function AdminTableComponent() {
                         <button
                           onClick={() => {
                             tripService.deleteTrip(trip.id).then(() => {
-                              init();
+                              initView();
                             });
                           }}
                           type="button"
@@ -171,7 +193,12 @@ export default function AdminTableComponent() {
                         >
                           <TrashIcon className="h-5 w-5" aria-hidden="true" />
                         </button>
+
                         <button
+                          onClick={() => {
+                            setSelectPassengers(trip.seats);
+                            setOpenViewPassengersModal(true);
+                          }}
                           type="button"
                           className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
@@ -194,6 +221,12 @@ export default function AdminTableComponent() {
         setSelectedOut={setSelectedOut}
         open={openCreateModal}
         setOpen={setOpenCreateModal}
+        updateTable={initView}
+      />
+      <ViewPassengersComponent
+        open={openViewPassengersModal}
+        setOpen={setOpenViewPassengersModal}
+        passengers={selectPassengers}
       />
     </div>
   );

@@ -10,6 +10,9 @@ class TripService {
   deleteTrip(id) {
     return http.delete(`/trips/${id}`);
   }
+  findByPoints(start, end) {
+    return http.get(`/trips/start/${start}/end/${end}`);
+  }
 }
 
 export default new TripService();

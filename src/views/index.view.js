@@ -3,8 +3,8 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-  { name: "Inicio", href: "#" },
-  { name: "Viajes", href: "#" },
+  { name: "Inicio", href: "/" },
+  { name: "Viajes", href: "/platform" },
 ];
 
 function IndexView() {

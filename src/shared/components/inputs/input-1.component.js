@@ -1,4 +1,4 @@
-export default function Input1Component({ title, example, type, name }) {
+export default function Input1Component({ title, example, type, name, value }) {
   return (
     <div>
       <label htmlFor="email" className="block text-sm font-medium text-white">
@@ -6,6 +6,9 @@ export default function Input1Component({ title, example, type, name }) {
       </label>
       <div className="mt-1">
         <input
+          onChange={(e) => {
+            value.current = e.target.value;
+          }}
           type={type}
           name={name}
           id={name}

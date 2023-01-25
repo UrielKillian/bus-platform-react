@@ -5,7 +5,6 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import TablePlatformComponent from "../../components/platform/table.component";
 import TicketsTableComponents from "../../components/platform/tickets-table.component";
 
 const navigation = [

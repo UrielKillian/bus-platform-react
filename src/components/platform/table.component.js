@@ -2,8 +2,10 @@ import Select1Component from "../../shared/components/selects/select-1.component
 import { useEffect, useState } from "react";
 import tripService from "../../services/trip.service";
 import departmentsService from "../../services/departments.service";
-import { ArrowPathIcon, TicketIcon } from "@heroicons/react/24/outline";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import BuyTicketComponent from "./buy-ticket.component";
+import TravelCardComponent from "../../shared/components/cards/travel-card.component.tsx";
+
 export default function TablePlatformComponent() {
   const [departments, setDepartments] = useState([]);
   const [trips, setTrips] = useState([]);
@@ -34,13 +36,7 @@ export default function TablePlatformComponent() {
       setTrips(response.data);
     });
   }
-  function countAvailableSeats(seats) {
-    var countAvailable = seats.filter(function (element) {
-      return element.isBooked == false;
-    }).length;
-    console.log(countAvailable);
-    return countAvailable;
-  }
+
   useEffect(() => {
     departmentsService.getAllDepartments().then((response) => {
       console.log(response.data);
@@ -61,8 +57,8 @@ export default function TablePlatformComponent() {
         </div>
       </div>
       <div className="mt-8 flex flex-col">
-        <div className="  grid grid-cols-1 mb-10  bg-gray-600 p-4 rounded-md">
-          <div className="grid md:grid-cols-2 grid-cols-1 md:space-x-3">
+        <div className="md:flex mb-10  bg-pal1 p-4 rounded-md">
+          <div className="grid md:grid-cols-2 w-full grid-cols-1 md:space-x-3">
             <Select1Component
               title={"Punto de partida"}
               items={departments}
@@ -78,7 +74,7 @@ export default function TablePlatformComponent() {
               className={"block text-sm font-medium text-white"}
             />
           </div>
-          <div className="justify-end flex mt-3 space-x-2">
+          <div className="justify-end flex mt-3 ml-3 space-x-2">
             <button
               onClick={() => {
                 tripService
@@ -88,7 +84,7 @@ export default function TablePlatformComponent() {
                     setTrips(response.data);
                   });
               }}
-              className="text-black px-2 py-1.5 border border-gray-300 bg-white rounded-md"
+              className="text-black px-2 py-1.5 mt-3 border border-gray-300 bg-white rounded-md"
             >
               Buscar
             </button>
@@ -96,7 +92,7 @@ export default function TablePlatformComponent() {
               onClick={() => {
                 init();
               }}
-              className="text-black px-2 py-1.5 border border-gray-300 bg-white rounded-md"
+              className="text-black px-2 py-1.5 mt-3 border border-gray-300 bg-white rounded-md"
             >
               <ArrowPathIcon className="h-5 w-5 text-red-700" />
             </button>
@@ -105,73 +101,23 @@ export default function TablePlatformComponent() {
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
-                  <tr className="divide-x divide-gray-200">
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      Origen
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Destino
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Fecha
-                    </th>
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6"
-                    >
-                      Asientos
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
-                  {trips.map((trip, tripIdx) => (
-                    <tr key={trip.id} className="divide-x divide-gray-200">
-                      <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
-                        {trip.originPoint.name}
-                      </td>
-                      <td className="whitespace-nowrap p-4 text-sm text-gray-500">
-                        {trip.destinationPoint.name}
-                      </td>
-                      <td className="whitespace-nowrap p-4 text-sm text-gray-500">
-                        {new Date(trip.departureTime).toLocaleDateString(
-                          "en-gb"
-                        )}
-                        {" - "}
-                        {Intl.DateTimeFormat("en", {
-                          hour: "numeric",
-                          minute: "numeric",
-                          hour12: true,
-                        }).format(new Date(trip.departureTime))}
-                      </td>
-                      <td className="whitespace-nowrap py-4 pl-4 text-sm text-gray-500 items-center flex space-x-4">
-                        <label>
-                          {countAvailableSeats(trip.seats)} Asientos disponibles
-                        </label>
-                        <button
-                          onClick={() => {
-                            setOpenTicketModal(true);
-                            setSelectTrip(trip);
-                          }}
-                          className="rounded-md px-2 py-1.5 border border-indigo-600 bg-indigo-600"
-                        >
-                          <TicketIcon className="h-5 w-5 text-white" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <div className="bg-white">
+                <div className="mx-auto max-w-2xl py-3 px-4 sm:px-6 lg:max-w-7xl">
+                  <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+                    Los mejores viajes:
+                  </h2>
+
+                  <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                    {trips.map((trip) => (
+                      <TravelCardComponent
+                        trip={trip}
+                        setSelected={setSelectTrip}
+                        setOpenTicketModal={setOpenTicketModal}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

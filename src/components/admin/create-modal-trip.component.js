@@ -1,8 +1,7 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { CheckIcon, MapIcon, TruckIcon } from "@heroicons/react/24/outline";
+import { MapIcon } from "@heroicons/react/24/outline";
 import Select1Component from "../../shared/components/selects/select-1.component";
-import tripService from "../../services/trip.service";
 import appService from "../../services/app.service";
 export default function CreteModalTripComponent({
   departments,

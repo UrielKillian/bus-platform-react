@@ -49,7 +49,7 @@ export default function AdminTableComponent() {
   }
   function countAvailableSeats(seats) {
     var countAvailable = seats.filter(function (element) {
-      return element.isBooked == false;
+      return element.isBooked === false;
     }).length;
     console.log(countAvailable);
     return countAvailable;

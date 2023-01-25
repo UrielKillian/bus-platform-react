@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import ticketService from "../../services/ticket.service";
 import ViewTicketComponent from "./view-ticket.component";
 
-function classNames(...classes) {
+/* function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
-}
+} */
 
 export default function TicketsTableComponents() {
   const [tickets, setTickets] = useState([]);

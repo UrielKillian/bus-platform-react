@@ -39,10 +39,10 @@ export default function BuyTicketComponent({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden bg-pal1 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-70 border border-gray-100 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8  sm:w-[50rem] sm:p-6">
+              <Dialog.Panel className="relative transform overflow-hidden bg-pal1 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-70 border border-gray-700 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8  sm:w-[50rem] sm:p-6">
                 <div className="p-5 border border-transparent  rounded-md">
-                  <div className="grid md:grid-cols-2 grid-cols-1 ">
-                    <div className="border p-2 border-gray-900 bg-pal1 items-center text-center rounded-md">
+                  <div className="grid md:grid-cols-4 grid-cols-1 ">
+                    <div className="border p-2 border-gray-900 md:col-span-1 bg-pal1 items-center text-center rounded-md">
                       <div className="border border-pal3 rounded-md text-white bg-pal3">
                         Conductor
                       </div>
@@ -78,7 +78,7 @@ export default function BuyTicketComponent({
                         ))}
                       </div>
                     </div>
-                    <div>
+                    <div className=" md:col-span-3">
                       <BuyOrdenComponent
                         start_point={selectedTrip.originPoint.name}
                         end_point={selectedTrip.destinationPoint.name}

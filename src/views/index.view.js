@@ -46,7 +46,7 @@ function IndexView() {
             aria-label="Global"
           >
             <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
-              <a href="#" className="-m-1.5 p-1.5">
+              <a href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
                 {/*  <img
                   className="h-8"
@@ -84,7 +84,7 @@ function IndexView() {
             >
               <div className="flex h-9 items-center justify-between">
                 <div className="flex">
-                  <a href="#" className="-m-1.5 p-1.5">
+                  <a href="/" className="-m-1.5 p-1.5">
                     <span className="sr-only">Your Company</span>
                     {/*  <img
                       className="h-8"
@@ -131,7 +131,10 @@ function IndexView() {
                 <div className="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                   <span className="text-gray-600">
                     Suscribete a nuestro boletín informativo.{" "}
-                    <a href="#" className="font-semibold text-indigo-600">
+                    <a
+                      href="/platform"
+                      className="font-semibold text-indigo-600"
+                    >
                       <span className="absolute inset-0" aria-hidden="true" />
                       Ir ahora <span aria-hidden="true">&rarr;</span>
                     </a>
@@ -148,7 +151,7 @@ function IndexView() {
                 </p>
                 <div className="mt-8 flex gap-x-4 sm:justify-center">
                   <a
-                    href="#"
+                    href="/platform"
                     className="inline-block rounded-lg bg-red-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-red-600 hover:bg-red-700 hover:ring-red-700"
                   >
                     Comprar{" "}

@@ -57,7 +57,13 @@ export default function BuyOrdenComponent({
           </span>
           <span className="flex items-center">
             <ClockIcon className="w-6 h-6 p-0.5 mr-1 rounded-md bg-pal1 text-white" />{" "}
-            {arrive_time}
+            {new Date(arrive_time).toLocaleDateString("en-gb")}
+            {" - "}
+            {Intl.DateTimeFormat("en", {
+              hour: "numeric",
+              minute: "numeric",
+              hour12: true,
+            }).format(new Date(arrive_time))}
           </span>
         </div>
         {selected ? (

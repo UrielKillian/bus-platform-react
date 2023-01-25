@@ -1,11 +1,14 @@
-import { Fragment } from "react";
 import { Disclosure } from "@headlessui/react";
 import {
   ArrowPathIcon,
   Bars3Icon,
+  ShoppingCartIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import TablePlatformComponent from "../../components/platform/table.component";
+import BuyCartComponent from "../../components/platform/buy-cart.component.tsx";
+import { useState } from "react";
+import FooterComponent from "../../shared/components/Footer/footer.component.tsx";
 
 const navigation = [
   { name: "Viajes", href: "/platform", current: true },
@@ -15,22 +18,23 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 function PlatformIndex() {
+  const [openCart, setOpenCart] = useState(false);
   return (
     <>
       <div className="min-h-full">
-        <div className="bg-gray-800 pb-32">
-          <Disclosure as="nav" className="bg-gray-800">
+        <div className="bg-[url('https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80')] bg-cover bg-center pb-32">
+          <Disclosure as="nav" className="bg-pal1">
             {({ open }) => (
               <>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                  <div className="border-b border-gray-700">
+                  <div>
                     <div className="flex h-16 items-center justify-between px-4 sm:px-0">
                       <div className="flex items-center">
                         <div className="flex-shrink-0">
                           <img
-                            className="h-8 w-8"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                            alt="Your Company"
+                            className="h-8 w-12"
+                            src="https://www.redbus.pe/i/59538b35953097248522a65b4b79650e.png"
+                            alt="Redbus"
                           />
                         </div>
                         <div className="hidden md:block">
@@ -42,7 +46,7 @@ function PlatformIndex() {
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-900 text-white"
-                                    : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    : "text-white hover:bg-gray-700 hover:text-white",
                                   "px-3 py-2 rounded-md text-sm font-medium"
                                 )}
                                 aria-current={item.current ? "page" : undefined}
@@ -59,11 +63,14 @@ function PlatformIndex() {
                             <label>DNI: 75181614</label>
                           </div>
                           <button
+                            onClick={() => {
+                              setOpenCart(true);
+                            }}
                             type="button"
-                            className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                            className="rounded-md bg-pal1 p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                           >
                             <span className="sr-only">View notifications</span>
-                            <ArrowPathIcon
+                            <ShoppingCartIcon
                               className="h-6 w-6"
                               aria-hidden="true"
                             />
@@ -156,6 +163,10 @@ function PlatformIndex() {
             {/* /End replace */}
           </div>
         </main>
+        <div>
+          <FooterComponent />
+        </div>
+        <BuyCartComponent open={openCart} setOpen={setOpenCart} />
       </div>
     </>
   );

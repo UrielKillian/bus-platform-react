@@ -6,7 +6,12 @@ import BuyOrdenComponent from "./buy-orden.component";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-export default function BuyTicketComponent({ open, setOpen, selectedTrip }) {
+export default function BuyTicketComponent({
+  open,
+  setOpen,
+  selectedTrip,
+  init,
+}) {
   const [selected, setSelected] = useState(null);
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -79,7 +84,10 @@ export default function BuyTicketComponent({ open, setOpen, selectedTrip }) {
                         end_point={selectedTrip.destinationPoint.name}
                         arrive_time={selectedTrip.departureTime}
                         selected={selected}
+                        setSelected={setSelected}
                         tripId={selectedTrip.id}
+                        setOpen={setOpen}
+                        init={init}
                       />
                     </div>
                   </div>

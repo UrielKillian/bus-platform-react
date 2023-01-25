@@ -47,6 +47,13 @@ export default function AdminTableComponent() {
       setTrips(response.data);
     });
   }
+  function countAvailableSeats(seats) {
+    var countAvailable = seats.filter(function (element) {
+      return element.isBooked == false;
+    }).length;
+    console.log(countAvailable);
+    return countAvailable;
+  }
   useEffect(() => {
     departmentsService.getAllDepartments().then((response) => {
       console.log(response.data);
@@ -179,7 +186,7 @@ export default function AdminTableComponent() {
                         }).format(new Date(trip.departureTime))}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        15
+                        {15 - countAvailableSeats(trip.seats)} Asientos Ocupados
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 space-x-3">
                         <button

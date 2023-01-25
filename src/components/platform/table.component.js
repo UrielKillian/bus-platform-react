@@ -180,6 +180,7 @@ export default function TablePlatformComponent() {
         open={openTicketModal}
         setOpen={setOpenTicketModal}
         selectedTrip={selectTrip}
+        init={init}
       />
     </div>
   );

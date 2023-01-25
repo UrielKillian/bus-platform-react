@@ -33,10 +33,12 @@ export default function TicketsTableComponents() {
     },
   });
   useEffect(() => {
-    ticketService.getAllTicket().then((response) => {
-      console.log(response.data);
-      setTickets(response.data);
-    });
+    setTimeout(() => {
+      ticketService.getAllTicket().then((response) => {
+        console.log(response.data);
+        setTickets(response.data);
+      });
+    }, 1000);
   }, []);
 
   const [openTicket, setOpenTicket] = useState(false);

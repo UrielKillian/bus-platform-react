@@ -8,16 +8,20 @@ import {
 import { useRef } from "react";
 import Input1Componet from "../../shared/components/inputs/input-1.component";
 import appService from "../../services/app.service";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function BuyOrdenComponent({
   start_point,
   end_point,
   arrive_time,
   selected,
+  setSelected,
   tripId,
+  setOpen,
+  init,
 }) {
   const name = useRef("");
   const lastName = useRef("");
+  const navigate = useNavigate();
 
   function createTicket() {
     console.log(lastName.current);
@@ -91,7 +95,10 @@ export default function BuyOrdenComponent({
               <button
                 onClick={() => {
                   createTicket();
-                  return redirect("/platform/tickets");
+                  setSelected(null);
+                  init();
+                  setOpen(false);
+                  navigate("/platform/tickets");
                 }}
                 type="button"
                 className="inline-flex items-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
